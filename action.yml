@@ -23,10 +23,10 @@ inputs:
     description: 'true to identify the release as a prerelease. false to identify the release as a full release.'
     required: false
     default: false
-  discussion_category_name:
-    description: 'check: https://docs.github.com/en/rest/releases/releases#create-a-release'
-    required: false
-    default: ''
+  # discussion_category_name:
+  #   description: 'check: https://docs.github.com/en/rest/releases/releases#create-a-release'
+  #   required: false
+  #   default: ''
   generate_release_notes:
     description: 'check: https://docs.github.com/en/rest/releases/releases#create-a-release'
     required: false

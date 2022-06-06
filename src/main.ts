@@ -2,7 +2,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-export async function run(): Promise<void> {
+async function run(): Promise<void> {
   try {
     const { owner, repo } = github.context.repo
 
@@ -13,7 +13,7 @@ export async function run(): Promise<void> {
     const body = core.getInput('body', { required: false })
     const draft = core.getBooleanInput('draft', { required: false })
     const prerelease = core.getBooleanInput('prerelease', { required: false })
-    const discussionCategoryName = core.getInput('discussion_category_name', { required: false })
+    // const discussionCategoryName = core.getInput('discussion_category_name', { required: false })
     const generateReleaseNotes = core.getBooleanInput('generate_release_notes', { required: false })
 
     core.info(

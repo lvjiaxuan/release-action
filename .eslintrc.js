@@ -8,7 +8,6 @@ module.exports = {
     sourceType: 'module',
     // project: './tsconfig.json',
   },
-  rules: {},
   env: {
     node: true,
     es6: true,
