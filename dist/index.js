@@ -68,7 +68,7 @@ async function run() {
             body,
             draft,
             prerelease,
-            discussion_category_name: discussionCategoryName,
+            // discussion_category_name: discussionCategoryName,
             generate_release_notes: generateReleaseNotes
         });
         core.info('Create a release successfully');

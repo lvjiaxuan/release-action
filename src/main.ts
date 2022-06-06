@@ -41,7 +41,7 @@ export async function run(): Promise<void> {
       body,
       draft,
       prerelease,
-      discussion_category_name: discussionCategoryName,
+      // discussion_category_name: discussionCategoryName,
       generate_release_notes: generateReleaseNotes
     })
 
