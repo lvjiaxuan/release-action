@@ -10,7 +10,8 @@
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
-    "all": "pnpm build && pnpm package"
+    "all": "pnpm build && pnpm package",
+    "test": "nr all && git add . && git commit -m \"chore:update\" && git tag v0.0.1 --force && git push origin --tags --force"
   },
   "repository": {
     "type": "git",
