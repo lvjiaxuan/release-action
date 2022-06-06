@@ -1,18 +1,9 @@
 // import { getInput, debug, setOutput, setFailed } from '@actions/core'
-import core from '@actions/core'
-import github from '@actions/github'
+import * as core from '@actions/core'
+import * as github from '@actions/github'
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
-    // const ms: string = getInput('milliseconds')
-    // debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
-
-    // debug(new Date().toTimeString())
-    // await wait(parseInt(ms, 10))
-    // debug(new Date().toTimeString())
-
-    // setOutput('time', new Date().toTimeString())
-
     const { owner, repo } = github.context.repo
 
     // Get inputs
@@ -39,7 +30,6 @@ async function run(): Promise<void> {
           generateReleaseNotes,
         })
     )
-
 
     // https://github.com/actions/toolkit/tree/main/packages/github
     const octokit = github.getOctokit(process.env.GITHUB_TOKEN as string)

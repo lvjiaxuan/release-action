@@ -6,32 +6,47 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.run = void 0;
 // import { getInput, debug, setOutput, setFailed } from '@actions/core'
-const core_1 = __importDefault(__nccwpck_require__(9602));
-const github_1 = __importDefault(__nccwpck_require__(1340));
+const core = __importStar(__nccwpck_require__(9602));
+const github = __importStar(__nccwpck_require__(1340));
 async function run() {
     try {
-        // const ms: string = getInput('milliseconds')
-        // debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
-        // debug(new Date().toTimeString())
-        // await wait(parseInt(ms, 10))
-        // debug(new Date().toTimeString())
-        // setOutput('time', new Date().toTimeString())
-        const { owner, repo } = github_1.default.context.repo;
+        const { owner, repo } = github.context.repo;
         // Get inputs
         // https://docs.github.com/en/rest/releases/releases#create-a-release
-        const tagName = core_1.default.getInput('tag_name', { required: false }) || github_1.default.context.ref.replace('refs/tags/', '');
-        const name = core_1.default.getInput('name', { required: false });
-        const body = core_1.default.getInput('body', { required: false });
-        const draft = core_1.default.getBooleanInput('draft', { required: false });
-        const prerelease = core_1.default.getBooleanInput('prerelease', { required: false });
-        const discussionCategoryName = core_1.default.getInput('discussion_category_name', { required: false });
-        const generateReleaseNotes = core_1.default.getBooleanInput('generate_release_notes', { required: false });
-        core_1.default.info('Print some variant: ' +
+        const tagName = core.getInput('tag_name', { required: false }) || github.context.ref.replace('refs/tags/', '');
+        const name = core.getInput('name', { required: false });
+        const body = core.getInput('body', { required: false });
+        const draft = core.getBooleanInput('draft', { required: false });
+        const prerelease = core.getBooleanInput('prerelease', { required: false });
+        const discussionCategoryName = core.getInput('discussion_category_name', { required: false });
+        const generateReleaseNotes = core.getBooleanInput('generate_release_notes', { required: false });
+        core.info('Print some variant: ' +
             JSON.stringify({
                 owner,
                 repo,
@@ -44,7 +59,7 @@ async function run() {
                 generateReleaseNotes,
             }));
         // https://github.com/actions/toolkit/tree/main/packages/github
-        const octokit = github_1.default.getOctokit(process.env.GITHUB_TOKEN);
+        const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
         octokit.rest.repos.createRelease({
             owner,
             repo,
@@ -56,13 +71,14 @@ async function run() {
             discussion_category_name: discussionCategoryName,
             generate_release_notes: generateReleaseNotes
         });
-        core_1.default.info('Create a release successfully');
+        core.info('Create a release successfully');
     }
     catch (error) {
         if (error instanceof Error)
-            core_1.default.setFailed(error.message);
+            core.setFailed(error.message);
     }
 }
+exports.run = run;
 run();
 
 
