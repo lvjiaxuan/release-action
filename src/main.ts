@@ -26,7 +26,7 @@ export async function run(): Promise<void> {
           body,
           draft,
           prerelease,
-          discussionCategoryName,
+          // discussionCategoryName,
           generateReleaseNotes,
         })
     )

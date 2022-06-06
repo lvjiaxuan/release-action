@@ -55,7 +55,7 @@ async function run() {
                 body,
                 draft,
                 prerelease,
-                discussionCategoryName,
+                // discussionCategoryName,
                 generateReleaseNotes,
             }));
         // https://github.com/actions/toolkit/tree/main/packages/github
