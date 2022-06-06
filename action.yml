@@ -1,4 +1,4 @@
-name: 'Create a release'
+name: 'release on tag push'
 description: 'Create a release on tag push'
 author: 'lvjiaxuan <471501748@qq.com> (https://github.com/lvjiaxuan)'
 # https://docs.github.com/en/rest/releases/releases#create-a-release
