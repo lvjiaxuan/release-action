@@ -1,6 +1,6 @@
 # release-action
 
-GitHub action Implementation of GitHub REST API's [Create a release](https://docs.github.com/en/rest/releases/releases#create-a-release)
+ [Create a release](https://docs.github.com/en/rest/releases/releases#create-a-release) by GitHub action.
 
 ## Inputs
 
