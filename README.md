@@ -30,52 +30,27 @@ jobs:
 
 ## [Node.js packages publish](https://docs.github.com/cn/actions/publishing-packages/publishing-nodejs-packages)
 
-### Setting NPM Token
+### 1. Specify `registry-url` inputs of *actions/setup-node* for generate .npmrc file
 
-1. Create your own npm token first: https://www.npmjs.com/settings/{yourname}/tokens
+```yml
+- uses: actions/setup-node@v2
+  with:
+    node-version: 16 # ${{ matrix.node }}
+    # .npmrc file for authentication would be generated
+    # https://npm.pkg.github.com(env.NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }})
+    registry-url: https://registry.npmjs.org 
+    cache: npm
+```
+
+> [Refer](https://github.com/actions/setup-node/issues/82#issuecomment-970324194): .npmrc file has more priority than publshConfig in package.json, so it will override properties.
+
+### 2. Specify NPM Token when run `npm publish`
+
+1. Create your own npm token first(refer to https://www.npmjs.com/settings/{yourname}/tokens)
 1. Set to GitHub Repo: [repo] -> settings -> secrets
 
 ```yml
-- uses: actions/setup-node@v2
+- run: npm publish
   env:
-    NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # setup-node 自动引用,用于创建 *.npmrc*
-  with:
-    node-version: 16 # ${{ matrix.node }}
-    cache: npm
+    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
-
-### *package.json*
-
-```json
-{
-  "name": "包名",
-  "version": "0.0.1",
-  "description": "描述"
-}
-```
-
-### Specify registry target
-
-Way1: Specify `registry-url` prop in *actions/setup-node*.
-```yml
-- uses: actions/setup-node@v2
-  env:
-    NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # setup-node 自动引用,用于创建 *.npmrc*
-  with:
-    node-version: 16 # ${{ matrix.node }}
-    registry-url: https://registry.npmjs.org # or https://npm.pkg.github.com(uses env.GITHUB_TOKEN)
-    cache: npm
-```
-
-Way2: Specify `publishConfig` prop in *package.json*.
-```json
-{
-  "publishConfig": {
-    "tag": "latest",
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  }
-}
-```
-
-Way2 gets higher priority than Way1.
