@@ -1,4 +1,4 @@
-name: 'Create a release'
+name: 'Release self'
 
 on:
   push:
@@ -6,16 +6,10 @@ on:
       - 'v*'
 
 jobs:
-  release: # make sure build/ci work properly
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      # https://github.com/pnpm/action-setup
-      # - uses: pnpm/action-setup@master
-      #   with:
-      #     version: 7
-      #     run_install: true
 
       - uses: ./
         env:

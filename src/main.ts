@@ -15,40 +15,58 @@ async function run(): Promise<void> {
     const prerelease = core.getBooleanInput('prerelease', { required: false })
     // const discussionCategoryName = core.getInput('discussion_category_name', { required: false })
     const generateReleaseNotes = core.getBooleanInput('generate_release_notes', { required: false })
+    const update = core.getBooleanInput('update', { required: false })
 
     core.info(
-      'Print some variant: ' +
-        JSON.stringify({
+      'Print inputs: ' +
+        JSON.stringify(
+          {
+            owner,
+            repo,
+            tag_name: tagName,
+            name,
+            body,
+            draft,
+            prerelease,
+            // discussion_category_name: discussionCategoryName,
+            generate_release_notes: generateReleaseNotes,
+          },
+          null,
+          2,
+        ),
+    )
+
+    // https://github.com/actions/toolkit/tree/main/packages/github
+    // https://docs.github.com/en/rest
+    const octokit = github.getOctokit(process.env.GITHUB_TOKEN as string)
+
+
+    const id = await octokit.rest.repos.getReleaseByTag({ owner, repo, tag: tagName })
+      .then(({ data: { id } }) => id).catch(() => false)
+
+    if(typeof id === 'number') {
+      core.info(`${ tagName }'s release exists.`)
+    } else {
+      void octokit.rest.repos
+        .createRelease({
           owner,
           repo,
-          tagName,
+          tag_name: tagName,
           name,
           body,
           draft,
           prerelease,
-          // discussionCategoryName,
-          generateReleaseNotes,
+          // discussion_category_name: discussionCategoryName,
+          generate_release_notes: generateReleaseNotes,
         })
-    )
+        .then(() => {
+          core.info('Create a release successfully.')
+        })
+    }
 
-    // https://github.com/actions/toolkit/tree/main/packages/github
-    const octokit = github.getOctokit(process.env.GITHUB_TOKEN as string)
-    octokit.rest.repos.createRelease({
-      owner,
-      repo,
-      tag_name: tagName,
-      name,
-      body,
-      draft,
-      prerelease,
-      // discussion_category_name: discussionCategoryName,
-      generate_release_notes: generateReleaseNotes
-    })
-
-    core.info('Create a release successfully')
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }
 }
 
-run()
+void run()

@@ -17,24 +17,20 @@
   ],
   "main": "dist/main.js",
   "scripts": {
-    "build": "nr fix && tsup src/main.ts",
+    "build": "nr fix && nx tsup src/main.ts",
     "fix": "eslint . --fix"
   },
-  "prettier": "@lvjiaxuan/prettier-config",
   "dependencies": {
     "@actions/core": "^1.9.0",
     "@actions/github": "^5.0.3"
   },
   "devDependencies": {
     "@lvjiaxuan/eslint-config": "^0.0.5",
-    "@lvjiaxuan/prettier-config": "^0.0.5",
     "@types/node": "^18.0.1",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
     "@typescript-eslint/parser": "^5.30.4",
     "eslint": "^8.19.0",
     "eslint-plugin-github": "^4.3.6",
-    "prettier": "2.7.1",
-    "tsup": "^6.1.3",
     "typescript": "^4.7.4"
   },
   "eslintConfig": {
