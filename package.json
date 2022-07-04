@@ -15,9 +15,9 @@
     "setup",
     "TypeScript template action"
   ],
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "nr fix && nx tsup src/main.ts",
+    "build": "nr fix && nx tsup src/index.ts",
     "fix": "eslint . --fix"
   },
   "dependencies": {
