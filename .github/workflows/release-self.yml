@@ -1,16 +1,16 @@
-name: 'Release Self'
+name: Release Self
 
 on:
   push:
     tags:
-      - 'v*'
+      - v*
 
 jobs:
   release:
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
     steps:
-      - uses: 'actions/checkout@v3'
+      - uses: actions/checkout@v3
 
-      - uses: './'
+      - uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

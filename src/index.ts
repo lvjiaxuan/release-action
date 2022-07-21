@@ -15,7 +15,6 @@ async function run(): Promise<void> {
     const prerelease = core.getBooleanInput('prerelease', { required: false })
     // const discussionCategoryName = core.getInput('discussion_category_name', { required: false })
     const generateReleaseNotes = core.getBooleanInput('generate_release_notes', { required: false })
-    const update = core.getBooleanInput('update', { required: false })
 
     core.info(
       'Print inputs: ' +
