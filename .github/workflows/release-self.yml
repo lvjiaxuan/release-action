@@ -1,9 +1,9 @@
-name: 'Release self'
+name: Release Self
 
 on:
   push:
     tags:
-      - 'v*'
+      - v*
 
 jobs:
   release:
