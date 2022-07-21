@@ -1,6 +1,6 @@
 # release-action
 
- [Create a release](https://docs.github.com/en/rest/releases/releases#create-a-release) by GitHub action.
+ [Create a release](https://docs.github.com/en/rest/releases/releases#create-a-release) by GitHub Action.
 
 ## Inputs
 
