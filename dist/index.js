@@ -10579,7 +10579,6 @@ async function run() {
     const draft = core.getBooleanInput("draft", { required: false });
     const prerelease = core.getBooleanInput("prerelease", { required: false });
     const generateReleaseNotes = core.getBooleanInput("generate_release_notes", { required: false });
-    const update = core.getBooleanInput("update", { required: false });
     core.info("Print inputs: " + JSON.stringify({
       owner,
       repo,
