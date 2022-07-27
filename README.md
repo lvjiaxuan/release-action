@@ -2,13 +2,16 @@
 
  [Create a release](https://docs.github.com/en/rest/releases/releases#create-a-release) by GitHub Action.
 
+## Features
+Skip when the tagName's release has already created.
+
 ## Inputs
 
 see [action.yml](./action.yml)
 
-## Example usage
+## Example Usage
 
-*/github/workflows/release-ci.yml*:
+Your */github/workflows/release-ci.yml*:
 ```yml
 name: 'Create a release'
 
@@ -30,7 +33,7 @@ jobs:
 
 ## [Node.js packages publish](https://docs.github.com/cn/actions/publishing-packages/publishing-nodejs-packages)
 
-### 1. Specify `registry-url` inputs of *actions/setup-node* for generate .npmrc file
+### 1. Specify `registry-url` inputs of *actions/setup-node*'s inputs for generating *.npmrc* file.
 
 ```yml
 - uses: actions/setup-node@v2
@@ -42,12 +45,12 @@ jobs:
     cache: npm
 ```
 
-> [Refer](https://github.com/actions/setup-node/issues/82#issuecomment-970324194): .npmrc file has more priority than publshConfig in package.json, so it will override properties.
+> [Refer](https://github.com/actions/setup-node/issues/82#issuecomment-970324194): *.npmrc* file has more priority than `publshConfig` of package.json, so it will override properties.
 
-### 2. Specify NPM Token when run `npm publish`
+### 2. Specify NPM Token for `npm publish`
 
 1. Create your own npm token first(refer to https://www.npmjs.com/settings/{yourname}/tokens)
-1. Set to GitHub Repo: [repo] -> settings -> secrets
+1. Set it to GitHub Repo: [repo] -> settings -> secrets
 
 ```yml
 - run: npm publish

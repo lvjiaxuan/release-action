@@ -43,7 +43,7 @@ async function run(): Promise<void> {
     const id = await octokit.rest.repos.getReleaseByTag({ owner, repo, tag: tagName })
       .then(({ data: { id } }) => id).catch(() => false)
 
-    if(typeof id === 'number') {
+    if (typeof id === 'number') {
       core.info(`${ tagName }'s release exists.`)
     } else {
       void octokit.rest.repos
