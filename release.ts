@@ -5,11 +5,15 @@ import path from 'path'
 import fs from 'fs'
 import chalk from 'chalk'
 import semver from 'semver'
+import minimist from 'minimist'
 import { execa } from 'execa'
 import { prompt } from 'enquirer'
 import { version as currentVersion } from './package.json'
 
-const args = process.argv.slice(2)
+const argv = minimist(process.argv.slice(2), {
+  boolean: [ 'test' ],
+  string: [ 'packages' ],
+})
 
 async function runTest() {
   console.log(chalk.cyan('\nRunning test...'))
@@ -18,7 +22,7 @@ async function runTest() {
 
 async function bumpVersion() {
   console.log(chalk.cyan('\nBumping monorepo versions...'))
-  let targetVersion = args[0]
+  let targetVersion = argv._[0]
 
   if (!targetVersion) {
     const { release } = await prompt<{ release: string }>({
@@ -48,17 +52,18 @@ async function runGit(version: string) {
   console.log(chalk.cyan('\nGit committing and pushing...'))
   await execa('git', [ 'add', '-A' ])
   await execa('git', [ 'commit', '-m', `Release: v${ version }` ])
-  await execa('git', [ 'push' ])
+  // await execa('git', [ 'push' ])
   console.log(chalk.cyan('\nGit tagging and pushing...'))
   await execa('git', [ 'tag', `v${ version }` ])
-  await execa('git', [ 'push', 'origin', `refs/tags/v${ version }` ])
+  // await execa('git', [ 'push', 'origin', `refs/tags/v${ version }` ])
 }
 
 
 async function main() {
-  // await runTest()
+  (argv.test as boolean) && await runTest()
   const version = await bumpVersion()
   await runGit(version)
+  process.exit(0)
 }
 
 main().catch(err => {
@@ -81,7 +86,10 @@ function updateVersions(version: string) {
   // 1. update root package.json
   updatePackage(__dirname, version)
   // 2. update all packages
-  const getPkgRoot = (pkg: string) => path.resolve(__dirname, 'packages/' + pkg)
-  const packages = fs.readdirSync(path.resolve(__dirname, 'packages'))
-  packages.forEach(p => updatePackage(getPkgRoot(p), version))
+  const packages = argv.packages as string
+  if (packages) {
+    const getPkgRoot = (pkg: string) => path.resolve(__dirname, 'packages/' + pkg)
+    const packages = fs.readdirSync(path.resolve(__dirname, 'packages'))
+    packages.forEach(p => updatePackage(getPkgRoot(p), version))
+  }
 }

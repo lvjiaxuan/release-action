@@ -4,12 +4,14 @@ specifiers:
   '@actions/core': ^1.9.1
   '@actions/github': ^5.0.3
   '@lvjiaxuan/eslint-config': ^0.0.20
+  '@types/minimist': ^1.2.2
   '@types/node': ^18.7.6
   '@types/semver': ^7.3.12
   chalk: ^5.0.1
   enquirer: ^2.3.6
   eslint: ^8.22.0
   execa: ^6.1.0
+  minimist: ^1.2.6
   semver: ^7.3.7
   typescript: ^4.7.4
 
@@ -17,12 +19,14 @@ devDependencies:
   '@actions/core': 1.9.1
   '@actions/github': 5.0.3
   '@lvjiaxuan/eslint-config': 0.0.20_4rv7y5c6xz3vfxwhbrcxxi73bq
+  '@types/minimist': 1.2.2
   '@types/node': 18.7.6
   '@types/semver': 7.3.12
   chalk: 5.0.1
   enquirer: 2.3.6
   eslint: 8.22.0
   execa: 6.1.0
+  minimist: 1.2.6
   semver: 7.3.7
   typescript: 4.7.4
 
@@ -260,6 +264,10 @@ packages:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
     dependencies:
       '@types/unist': 2.0.6
+    dev: true
+
+  /@types/minimist/1.2.2:
+    resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
   /@types/node/18.7.6:
@@ -1104,6 +1112,10 @@ packages:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
+    dev: true
+
+  /minimist/1.2.6:
+    resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: true
 
   /ms/2.1.2:
