@@ -17,17 +17,21 @@
   ],
   "main": "./dist/index.js",
   "scripts": {
-    "build": "nr fix && nx rimraf dist && nx esbuild ./src/index.ts --bundle --platform=node --outfile=./dist/index.js",
-    "lint": "eslint ."
-  },
-  "dependencies": {
-    "@actions/core": "^1.9.0",
-    "@actions/github": "^5.0.3"
+    "build": "nr lint --fix && nx rimraf dist && nx tsup ./src/index.ts",
+    "lint": "eslint .",
+    "release": "nr build && nx tsx release.ts"
   },
   "devDependencies": {
-    "@lvjiaxuan/eslint-config": "^0.0.9",
-    "@types/node": "^18.6.1",
-    "eslint": "^8.20.0",
+    "@actions/core": "^1.9.1",
+    "@actions/github": "^5.0.3",
+    "@lvjiaxuan/eslint-config": "^0.0.20",
+    "@types/node": "^18.7.6",
+    "@types/semver": "^7.3.12",
+    "chalk": "^5.0.1",
+    "enquirer": "^2.3.6",
+    "eslint": "^8.22.0",
+    "execa": "^6.1.0",
+    "semver": "^7.3.7",
     "typescript": "^4.7.4"
   },
   "eslintConfig": {
