@@ -50,7 +50,7 @@ async function run(): Promise<void> {
         .createRelease({
           owner,
           repo,
-          tag_name: tagName,
+          tag_name: `Release ${ tagName }`,
           name,
           body,
           draft,
@@ -58,9 +58,7 @@ async function run(): Promise<void> {
           // discussion_category_name: discussionCategoryName,
           generate_release_notes: generateReleaseNotes,
         })
-        .then(() => {
-          core.info('Create a release successfully.')
-        })
+        .then(() => core.info('Create a release successfully.'))
     }
 
   } catch (error) {

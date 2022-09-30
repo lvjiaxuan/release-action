@@ -7,18 +7,18 @@ Skip when the tagName's release has already created.
 
 ## Inputs
 
-see [action.yml](./action.yml)
+See [action.yml](./action.yml)
 
 ## Example Usage
 
 Your */github/workflows/release-ci.yml*:
 ```yml
-name: 'Create a release'
+name: Create a release
 
 on:
   push:
     tags:
-      - 'v*'
+      - v*
 
 jobs:
   release:
@@ -33,7 +33,7 @@ jobs:
 
 ## [Node.js packages publish](https://docs.github.com/cn/actions/publishing-packages/publishing-nodejs-packages)
 
-### 1. Specify `registry-url` inputs of *actions/setup-node*'s inputs for generating *.npmrc* file.
+### 1. Specify `registry-url` of *actions/setup-node*'s inputs for generating *.npmrc* file.
 
 ```yml
 - uses: actions/setup-node@v2
