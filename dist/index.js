@@ -8113,8 +8113,8 @@ async function run() {
       void octokit.rest.repos.createRelease({
         owner,
         repo,
-        tag_name: `Release ${tagName}`,
-        name,
+        tag_name: tagName,
+        name: `Release ${tagName}`,
         body,
         draft,
         prerelease,
