@@ -59,9 +59,12 @@ async function run(): Promise<void> {
       body && (params.body = body)
       discussionCategoryName && (params.discussion_category_name = discussionCategoryName)
 
-      await octokit.rest.repos
+      void octokit.rest.repos
         .createRelease(params)
-        .then(() => core.info('Create a release successfully.'))
+        .then(({ data }) => {
+          core.info('Successfully created a release.')
+          core.info('Visit: ' + data.html_url)
+        })
     }
 
   } catch (error) {
