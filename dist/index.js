@@ -8100,6 +8100,7 @@ async function run() {
           body,
           draft,
           prerelease,
+          discussion_category_name: discussionCategoryName,
           generate_release_notes: generateReleaseNotes
         },
         null,
@@ -8122,7 +8123,10 @@ async function run() {
       name && (params.name = name);
       body && (params.body = body);
       discussionCategoryName && (params.discussion_category_name = discussionCategoryName);
-      void octokit.rest.repos.createRelease(params).then(() => core.info("Create a release successfully."));
+      void octokit.rest.repos.createRelease(params).then(({ data }) => {
+        core.info("Successfully created a release.");
+        core.info("Visit: " + data.html_url);
+      });
     }
   } catch (error) {
     if (error instanceof Error)

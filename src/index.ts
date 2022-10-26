@@ -61,6 +61,7 @@ async function run(): Promise<void> {
 
       void octokit.rest.repos
         .createRelease(params)
+        // eslint-disable-next-line promise/always-return
         .then(({ data }) => {
           core.info('Successfully created a release.')
           core.info('Visit: ' + data.html_url)
