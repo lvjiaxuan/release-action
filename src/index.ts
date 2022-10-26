@@ -13,7 +13,7 @@ async function run(): Promise<void> {
     const body = core.getInput('body', { required: false })
     const draft = core.getBooleanInput('draft', { required: false })
     const prerelease = core.getBooleanInput('prerelease', { required: false })
-    // const discussionCategoryName = core.getInput('discussion_category_name', { required: false })
+    const discussionCategoryName = core.getInput('discussion_category_name', { required: false })
     const generateReleaseNotes = core.getBooleanInput('generate_release_notes', { required: false })
 
     core.info(
@@ -39,25 +39,28 @@ async function run(): Promise<void> {
     // https://docs.github.com/en/rest
     const octokit = github.getOctokit(process.env.GITHUB_TOKEN as string)
 
-
     const id = await octokit.rest.repos.getReleaseByTag({ owner, repo, tag: tagName })
       .then(({ data: { id } }) => id).catch(() => false)
 
     if (typeof id === 'number') {
-      core.info(`${ tagName }'s release exists.`)
+      core.info(`${ tagName }'s release exists. Skip.`)
     } else {
+
+      const params: Parameters<typeof octokit.rest.repos.createRelease>[0] = {
+        owner,
+        repo,
+        tag_name: tagName,
+        draft,
+        prerelease,
+        generate_release_notes: generateReleaseNotes,
+      }
+
+      name && (params.name = name)
+      body && (params.body = body)
+      discussionCategoryName && (params.discussion_category_name = discussionCategoryName)
+
       void octokit.rest.repos
-        .createRelease({
-          owner,
-          repo,
-          tag_name: tagName,
-          name: `Release ${ tagName }`,
-          body,
-          draft,
-          prerelease,
-          // discussion_category_name: discussionCategoryName,
-          generate_release_notes: generateReleaseNotes,
-        })
+        .createRelease(params)
         .then(() => core.info('Create a release successfully.'))
     }
 
