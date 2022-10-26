@@ -8088,6 +8088,7 @@ async function run() {
     const body = core.getInput("body", { required: false });
     const draft = core.getBooleanInput("draft", { required: false });
     const prerelease = core.getBooleanInput("prerelease", { required: false });
+    const discussionCategoryName = core.getInput("discussion_category_name", { required: false });
     const generateReleaseNotes = core.getBooleanInput("generate_release_notes", { required: false });
     core.info(
       "Print inputs: " + JSON.stringify(
@@ -8108,18 +8109,20 @@ async function run() {
     const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
     const id = await octokit.rest.repos.getReleaseByTag({ owner, repo, tag: tagName }).then(({ data: { id: id2 } }) => id2).catch(() => false);
     if (typeof id === "number") {
-      core.info(`${tagName}'s release exists.`);
+      core.info(`${tagName}'s release exists. Skip.`);
     } else {
-      void octokit.rest.repos.createRelease({
+      const params = {
         owner,
         repo,
         tag_name: tagName,
-        name: `Release ${tagName}`,
-        body,
         draft,
         prerelease,
         generate_release_notes: generateReleaseNotes
-      }).then(() => core.info("Create a release successfully."));
+      };
+      name && (params.name = name);
+      body && (params.body = body);
+      discussionCategoryName && (params.discussion_category_name = discussionCategoryName);
+      void octokit.rest.repos.createRelease(params).then(() => core.info("Create a release successfully."));
     }
   } catch (error) {
     if (error instanceof Error)

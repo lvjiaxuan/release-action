@@ -1,6 +1,6 @@
 {
   "name": "@lvjiaxuan/release-action",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "private": true,
   "description": "Create a release on tag push",
   "author": "lvjiaxuan <471501748@qq.com> (https://github.com/lvjiaxuan)",
