@@ -27,7 +27,7 @@ async function run(): Promise<void> {
             body,
             draft,
             prerelease,
-            // discussion_category_name: discussionCategoryName,
+            discussion_category_name: discussionCategoryName,
             generate_release_notes: generateReleaseNotes,
           },
           null,
@@ -59,7 +59,7 @@ async function run(): Promise<void> {
       body && (params.body = body)
       discussionCategoryName && (params.discussion_category_name = discussionCategoryName)
 
-      void octokit.rest.repos
+      await octokit.rest.repos
         .createRelease(params)
         .then(() => core.info('Create a release successfully.'))
     }
