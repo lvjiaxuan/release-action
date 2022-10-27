@@ -8,7 +8,7 @@ async function run(): Promise<void> {
 
     // Get inputs
     // https://docs.github.com/en/rest/releases/releases#create-a-release
-    const tagName = github.context.ref.replace('refs/tags/', '')
+    const tagName = core.getInput('tag_name', { required: false }) || github.context.ref.replace('refs/tags/', '')
     const name = core.getInput('name', { required: false })
     const body = core.getInput('body', { required: false })
     const draft = core.getBooleanInput('draft', { required: false })
