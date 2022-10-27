@@ -8083,7 +8083,7 @@ var github = __toESM(require_github());
 async function run() {
   try {
     const { owner, repo } = github.context.repo;
-    const tagName = core.getInput("tag_name", { required: false }) || github.context.ref.replace("refs/tags/", "");
+    const tagName = github.context.ref.replace("refs/tags/", "");
     const name = core.getInput("name", { required: false });
     const body = core.getInput("body", { required: false });
     const draft = core.getBooleanInput("draft", { required: false });
