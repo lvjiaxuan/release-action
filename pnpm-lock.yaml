@@ -5,8 +5,8 @@ specifiers:
   '@actions/github': ^5.1.1
   '@lvjiaxuan/eslint-config': ^0.2.1
   '@types/minimist': ^1.2.2
-  '@types/node': ^18.11.5
-  '@types/semver': ^7.3.12
+  '@types/node': ^18.11.7
+  '@types/semver': ^7.3.13
   chalk: ^5.1.2
   enquirer: ^2.3.6
   eslint: ^8.26.0
@@ -20,8 +20,8 @@ devDependencies:
   '@actions/github': 5.1.1
   '@lvjiaxuan/eslint-config': 0.2.1_wyqvi574yv7oiwfeinomdzmc3m
   '@types/minimist': 1.2.2
-  '@types/node': 18.11.5
-  '@types/semver': 7.3.12
+  '@types/node': 18.11.7
+  '@types/semver': 7.3.13
   chalk: 5.1.2
   enquirer: 2.3.6
   eslint: 8.26.0
@@ -272,12 +272,12 @@ packages:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
-  /@types/node/18.11.5:
-    resolution: {integrity: sha512-3JRwhbjI+cHLAkUorhf8RnqUbFXajvzX4q6fMn5JwkgtuwfYtRQYI3u4V92vI6NJuTsbBQWWh3RZjFsuevyMGQ==}
+  /@types/node/18.11.7:
+    resolution: {integrity: sha512-LhFTglglr63mNXUSRYD8A+ZAIu5sFqNJ4Y2fPuY7UlrySJH87rRRlhtVmMHplmfk5WkoJGmDjE9oiTfyX94CpQ==}
     dev: true
 
-  /@types/semver/7.3.12:
-    resolution: {integrity: sha512-WwA1MW0++RfXmCr12xeYOOC5baSC9mSb0ZqCquFzKhcoF4TvHu5MKOuXsncgZcpVFhB1pXd5hZmM0ryAoCp12A==}
+  /@types/semver/7.3.13:
+    resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
     dev: true
 
   /@types/unist/2.0.6:
@@ -391,7 +391,7 @@ packages:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
       '@types/json-schema': 7.0.11
-      '@types/semver': 7.3.12
+      '@types/semver': 7.3.13
       '@typescript-eslint/scope-manager': 5.41.0
       '@typescript-eslint/types': 5.41.0
       '@typescript-eslint/typescript-estree': 5.41.0_typescript@4.8.4
