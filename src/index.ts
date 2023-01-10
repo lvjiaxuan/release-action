@@ -42,23 +42,31 @@ async function run(): Promise<void> {
     const id = await octokit.rest.repos.getReleaseByTag({ owner, repo, tag: tagName })
       .then(({ data: { id } }) => id).catch(() => false)
 
+    const params: Parameters<typeof octokit.rest.repos.createRelease>[0] = {
+      owner,
+      repo,
+      tag_name: tagName,
+      draft,
+      prerelease,
+      generate_release_notes: generateReleaseNotes,
+    }
+
+    name && (params.name = name)
+    body && (params.body = body)
+    discussionCategoryName && (params.discussion_category_name = discussionCategoryName)
+
     if (typeof id === 'number') {
-      core.info(`${ tagName }'s release exists. Skip.`)
+      core.info(`${ tagName }'s release exists. Update it.`)
+
+      await octokit.rest.repos.updateRelease({
+        release_id: id,
+        ...params,
+      // eslint-disable-next-line promise/always-return
+      }).then(({ data }) => {
+        core.info(`Successfully update ${ id } release.`)
+        core.info('Visit: ' + data.html_url)
+      })
     } else {
-
-      const params: Parameters<typeof octokit.rest.repos.createRelease>[0] = {
-        owner,
-        repo,
-        tag_name: tagName,
-        draft,
-        prerelease,
-        generate_release_notes: generateReleaseNotes,
-      }
-
-      name && (params.name = name)
-      body && (params.body = body)
-      discussionCategoryName && (params.discussion_category_name = discussionCategoryName)
-
       void octokit.rest.repos
         .createRelease(params)
         // eslint-disable-next-line promise/always-return
