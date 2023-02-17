@@ -2,8 +2,7 @@
 
  [Create a release](https://docs.github.com/en/rest/releases/releases#create-a-release) through GitHub Action.
 
-## Features
-Skip when the tagName's release has already created.
+Update when the tagName's release has already created.
 
 ## Inputs
 
